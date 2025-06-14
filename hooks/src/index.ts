@@ -4,35 +4,46 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const app = express();
+app.use(express.json());
 
+    console.log("Reached Here 1");
 
 // https://hooks.zapier.com/hooks/catch/1234567/2342424/
 
 // password logic
 
-app.post('/hooks/catch/:hookId/:zapId?', async (req, res) => {
+app.post('/hooks/catch/:hookId/:zapId', async (req, res) => {
     const userId = req.params.hookId;
     const zapId = req.params.zapId;
     const body = req.body;
-    console.log('Received hook:', { userId, zapId, body });=
+    console.log('Received hook:', { userId, zapId, body });
+
+    console.log("Reached Here 2");
+
     await prisma.$transaction(async tx => {
-        const run = await prisma.zapRun.create({
+        const run = await tx.zapRun.create({
             data: {
                 zapId: zapId,
                 metadata: body
             }
         });
-        await prisma.zapRunOutbox.create({
+        await tx.zapRunOutbox.create({
             data: {
                 zapRunId: run.id,
             }
         })
     })
-    // store in db a new trigger
-    await prisma.zapRun.create({
-        data: {
-            zapId: zapId
 
-        }
+    console.log("Reached Here 3");
+
+    // store in db a new trigger
+
+    res.json({
+        message: "Webhook Received"
     })
+    
 })
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
