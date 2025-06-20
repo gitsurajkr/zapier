@@ -26,11 +26,12 @@ function main() {
                 where: {},
                 take: 10,
             });
+            console.log(pendingRows);
             pendingRows.forEach(r => {
                 producer.send({
                     topic: TOPIC_NAMES,
                     messages: pendingRows.map(r => ({
-                        value: r.zapRunId
+                        value: JSON.stringify({ zapRunId: r.zapRunId, stage: 0 })
                     }))
                 }).then(() => {
                     console.log("Sent message to Kafka", r);
@@ -38,6 +39,14 @@ function main() {
                     console.error("Error sending message to Kafka", err);
                 });
             });
+            //      producer.send({
+            //     topic: TOPIC_NAMES,
+            //     messages: pendingRows.map(r => {
+            //         return{
+            //             value: JSON.stringify({zapRunId: r.zapRunId, stage: 0})
+            //         }
+            //     })
+            //    })
             yield client.zapRunOutbox.deleteMany({
                 where: {
                     id: {
@@ -45,6 +54,7 @@ function main() {
                     }
                 }
             });
+            yield new Promise(r => setTimeout(r, 3000));
         }
     });
 }

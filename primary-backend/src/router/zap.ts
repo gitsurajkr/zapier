@@ -28,7 +28,8 @@ zapRouter.post("/", authMiddleware, async (req: Request, res: Response) => {
                 actions: {
                     create: parsedData.data.actions.map((x, index) => ({
                         actionId: x.availableActionId,
-                        sortingOrder: index
+                        sortingOrder: index,
+                        metadata: x.actionMetadata
                     }))
                 }
             }
@@ -37,6 +38,7 @@ zapRouter.post("/", authMiddleware, async (req: Request, res: Response) => {
             data: {
                 triggerId: parsedData.data.availableTriggerId,
                 zapId: zap.id
+
             }
         })
         await tx.zap.update({

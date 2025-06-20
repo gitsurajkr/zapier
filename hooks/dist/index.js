@@ -27,13 +27,13 @@ app.post('/hooks/catch/:hookId/:zapId', (req, res) => __awaiter(void 0, void 0, 
     console.log('Received hook:', { userId, zapId, body });
     console.log("Reached Here 2");
     yield prisma.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
-        const run = yield prisma.zapRun.create({
+        const run = yield tx.zapRun.create({
             data: {
                 zapId: zapId,
                 metadata: body
             }
         });
-        yield prisma.zapRunOutbox.create({
+        yield tx.zapRunOutbox.create({
             data: {
                 zapRunId: run.id,
             }
@@ -45,6 +45,6 @@ app.post('/hooks/catch/:hookId/:zapId', (req, res) => __awaiter(void 0, void 0, 
         message: "Webhook Received"
     });
 }));
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(3002, () => {
+    console.log('Server is running on port 3002');
 });

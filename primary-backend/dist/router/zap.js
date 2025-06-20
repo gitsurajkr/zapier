@@ -35,7 +35,8 @@ exports.zapRouter.post("/", middleware_1.authMiddleware, (req, res) => __awaiter
                 actions: {
                     create: parsedData.data.actions.map((x, index) => ({
                         actionId: x.availableActionId,
-                        sortingOrder: index
+                        sortingOrder: index,
+                        metadata: x.actionMetadata
                     }))
                 }
             }
