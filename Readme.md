@@ -1,4 +1,4 @@
-# Zapier Clone
+# Zapier-like Automation Platform
 
 This project is a Zapier-like automation platform built with Node.js, Express, TypeScript, and PostgreSQL. It follows a microservice architecture to handle different aspects of the automation workflow.
 
@@ -10,6 +10,8 @@ The project consists of four main services:
 2.  **Hooks** - Service for receiving webhook events from external services
 3.  **Processor** - Service for processing events from hooks and sending them to the worker
 4.  **Worker** - Service that executes the actual automation tasks
+5.  **Frontend** - Next.js web application for the user interface
+
 
 ## Data Flow
 
@@ -20,6 +22,7 @@ The project consists of four main services:
 
 ## Technologies
 
+-   **Frontend**: Next.js, React, TailwindCSS
 -   **Backend**: Node.js, Express, TypeScript
 -   **Database**: PostgreSQL
 -   **ORM**: Prisma
@@ -52,6 +55,13 @@ The project consists of four main services:
     # Start Kafka (if not already running)
     # Add your kafka setup command here, for example:
     # docker-compose up -d kafka # (if you have a docker-compose.yml for Kafka)
+    docker run -d -p 9092:9092 --name kafka apache/kafka:latest
+
+    # create topic in kafka
+    docker exec -it <kafka-container-id> /bin/bash
+
+    ./kafka-topics.sh --create --topic <your-topic-name> --bootstrap-server localhost:9092
+    
     ```
 
 3.  **Setup each service**
@@ -66,42 +76,47 @@ The project consists of four main services:
     pnpm start
     ```
 
+
+
+## 🔑 Key Features
+
+-  User authentication and management  
+-  Custom workflow creation with trigger and action selection  
+-  Integration with various external services  
+-  Real-time workflow execution  
+-  Webhook support for triggering workflows  
+-  Transaction support for reliable processing  
+
+---
+
 ## API Documentation
 
-### User Endpoints (Example - from `primary-backend`)
+### User Endpoints
 
--   `POST /api/v1/user/signup` - Register a new user
--   `POST /api/v1/user/signin` - Login a user
--   `GET /api/v1/user/user` - Get current user information (authenticated)
+- `POST /api/v1/user/signup` – Register a new user  
+- `POST /api/v1/user/signin` – Login a user  
+- `GET /api/v1/user/user` – Get current user information (authenticated)  
 
-### Zap Endpoints (Example - from `primary-backend`)
+### Zap Endpoints
 
--   `POST /api/v1/zap` - Create a new automation
--   `GET /api/v1/zap` - List user automations
--   `GET /api/v1/zap/:id` - Get automation details
+- `POST /api/v1/zap` – Create a new automation  
+- `GET /api/v1/zap` – List user automations  
+- `GET /api/v1/zap/:id` – Get automation details  
 
-### Webhook Endpoints (Example - from `hooks`)
+### Webhook Endpoints
 
--   `POST /hooks/catch/:hookId/:zapId` - Endpoint for receiving webhook events
+- `POST /hooks/catch/:hookId/:zapId` – Endpoint for receiving webhook events  
+
+---
 
 ## Core Concepts
 
--   **Zap**: An automation workflow consisting of a trigger and one or more actions.
--   **Trigger**: An event that starts a Zap (e.g., a webhook call).
--   **Action**: A task that is executed as part of a Zap.
--   **ZapRun**: A record of an execution of a Zap.
--   **Outbox Pattern**: Used for reliable event processing between services, ensuring messages are eventually delivered even if a service temporarily fails.
+- **Zap**: An automation workflow consisting of a trigger and one or more actions  
+- **Trigger**: An event that starts a Zap (e.g., a webhook call)  
+- **Action**: A task that is executed as part of a Zap  
+- **ZapRun**: A record of an execution of a Zap  
+- **Outbox Pattern**: Used for reliable event processing between services  
 
-## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the `LICENSE` file for details (if one exists)
+## Happy Automating!
