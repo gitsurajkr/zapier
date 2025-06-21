@@ -18,6 +18,8 @@ async function main() {
             where: {},
             take: 10,
         })
+
+        
         console.log(pendingRows)
 
         pendingRows.forEach(r => {

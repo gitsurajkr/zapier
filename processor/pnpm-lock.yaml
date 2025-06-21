@@ -11,6 +11,12 @@ importers:
       '@prisma/client':
         specifier: 6.9.0
         version: 6.9.0(prisma@6.9.0(typescript@5.8.3))(typescript@5.8.3)
+      '@types/dotenv':
+        specifier: ^8.2.3
+        version: 8.2.3
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
       kafkajs:
         specifier: ^2.2.4
         version: 2.2.4
@@ -20,6 +26,10 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.3
+        version: 24.0.3
 
 packages:
 
@@ -53,6 +63,17 @@ packages:
   '@prisma/get-platform@6.9.0':
     resolution: {integrity: sha512-/B4n+5V1LI/1JQcHp+sUpyRT1bBgZVPHbsC4lt4/19Xp4jvNIVcq5KYNtQDk5e/ukTSjo9PZVAxxy9ieFtlpTQ==}
 
+  '@types/dotenv@8.2.3':
+    resolution: {integrity: sha512-g2FXjlDX/cYuc5CiQvyU/6kkbP1JtmGzh0obW50zD7OKeILVL0NSpPWLXVfqoAGQjom2/SLLx9zHq0KXvD6mbw==}
+    deprecated: This is a stub types definition. dotenv provides its own type definitions, so you do not need this installed.
+
+  '@types/node@24.0.3':
+    resolution: {integrity: sha512-R4I/kzCYAdRLzfiCabn9hxWfbuHS573x+r0dJMkkzThEa7pbrcDWK+9zu3e7aBOouf+rQAciqPFMnxwr0aWgKg==}
+
+  dotenv@16.5.0:
+    resolution: {integrity: sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==}
+    engines: {node: '>=12'}
+
   jiti@2.4.2:
     resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
     hasBin: true
@@ -75,6 +96,9 @@ packages:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  undici-types@7.8.0:
+    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
 
 snapshots:
 
@@ -108,6 +132,16 @@ snapshots:
     dependencies:
       '@prisma/debug': 6.9.0
 
+  '@types/dotenv@8.2.3':
+    dependencies:
+      dotenv: 16.5.0
+
+  '@types/node@24.0.3':
+    dependencies:
+      undici-types: 7.8.0
+
+  dotenv@16.5.0: {}
+
   jiti@2.4.2: {}
 
   kafkajs@2.2.4: {}
@@ -120,3 +154,5 @@ snapshots:
       typescript: 5.8.3
 
   typescript@5.8.3: {}
+
+  undici-types@7.8.0: {}

@@ -5,7 +5,7 @@ import base58 from "bs58";
 const connection = new Connection("https://api.mainnet-beta.solana.com", "finalized");
 
 export async function sendSol(to: string, amount: string) {
-    const keypair = Keypair.fromSecretKey(base58.decode((process.env.SOL_PRIVATE_KEY ?? "")))
+    const keypair = Keypair.fromSecretKey(base58.decode((process.env.SOL_PRIVATE_KEY?? "")))
     console.log(keypair.publicKey);
     const transferTransaction = new Transaction().add(
         SystemProgram.transfer({

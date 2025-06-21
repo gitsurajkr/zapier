@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc -b && node dist/index.js"
+    "dev": "tsc -b && node dist/index.js"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node dist/prisma/seed.js"
   },
   "keywords": [],
   "author": "",
